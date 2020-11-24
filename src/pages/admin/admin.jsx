@@ -1,19 +1,21 @@
 import React, {Component} from 'react'
+
+import {Switch, Route, Redirect} from "react-router-dom";
+
+
+import {Layout} from 'antd';
+
 import memoryUtils from "../../utils/memoryUtils";
-import {Redirect} from "react-router-dom";
+import LeftNav from "../../components/left-nav/left-nav";
+import Header from "../../components/header/header";
+import Home from "../home/home";
+import PersonalInfo from "../personal-info/personal-info";
+import TeacherList from "../teacher-list/teacher-list";
+import StudentList from "../student-list/student-list";
+import ConfirmStudentList from "../student-list/confirm-student-list";
+import Direction from "../direction/direction";
 
-
-import {Layout, Menu, Breadcrumb} from 'antd';
-import {
-    DesktopOutlined,
-    PieChartOutlined,
-    FileOutlined,
-    TeamOutlined,
-    UserOutlined,
-} from '@ant-design/icons';
-
-const {Header, Content, Footer, Sider} = Layout;
-const {SubMenu} = Menu;
+const {Content, Footer, Sider} = Layout;
 
 /*
 管理的路由组件
@@ -29,11 +31,24 @@ export default class Admin extends Component {
         }
         return (
             <Layout style={{height: '100%'}}>
-                <Sider style={{color:'#996699'}}>Sider</Sider>
+                <Sider style={{backgroundColor: '#fff'}}>    {/*style={{backgroundColor: '#6a286a'}}*/}
+                    <LeftNav/>
+                </Sider>
                 <Layout>
                     <Header>Header</Header>
-                    <Content>Content</Content>
-                    <Footer>Footer</Footer>
+                    <Content style={{margin: 22, backgroundColor: '#fff'}}>
+                        <Switch>
+                            <Route path='/home' component={Home}/>
+                            <Route path='/info' component={PersonalInfo}/>
+                            <Route path='/teacher' component={TeacherList}/>
+                            <Route path='/tosel' component={StudentList}/>
+                            <Route path='/confirmstudent' component={ConfirmStudentList}/>
+                            {/*<Route path='/teacher' component={TeacherList}/>*/}
+                            <Route path='/direction' component={Direction}/>
+                            <Redirect to='/home'></Redirect>
+                        </Switch>
+                    </Content>
+                    <Footer style={{textAlign: 'center', color: '#a59e9e'}}>@嘉爷爷</Footer>
                 </Layout>
             </Layout>
         )

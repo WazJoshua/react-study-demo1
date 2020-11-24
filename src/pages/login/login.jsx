@@ -5,7 +5,7 @@ import {Redirect} from "react-router-dom";
 import './login.less'
 import {reqLogin} from '../../api'
 
-import logo from './images/logo.png'
+import logo from '../../assets/images/logo.png'
 import memoryUtils from "../../utils/memoryUtils";
 import storageUtils from "../../utils/storageUtils";
 
@@ -43,7 +43,7 @@ export default class Login extends Component {
             const user = result.user
             memoryUtils.user = user //保存在内存中
             storageUtils.saveUser(user) //保存在local
-            console.log(user)
+            //console.log(user)
             //跳转到指定页面(不需要再回退回来,需要回退要.push())
             this.props.history.replace('/')
         } else {
@@ -66,7 +66,7 @@ export default class Login extends Component {
             <div className="login">
                 <header className='login-header'>
                     <img src={logo} alt="logo"/>
-                    <h1>毕业论文双选系统</h1>
+                    <h1>导师双选系统</h1>
                 </header>
                 <section className='login-content'>
                     <h2>用户登录</h2>
