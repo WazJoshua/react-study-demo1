@@ -4,6 +4,7 @@
 import store from 'store'
 
 const USER_KEY = 'user_key';
+const USERMSG_KEY = 'usermsg_key';
 export default {
     /*
     * 保存user
@@ -25,6 +26,30 @@ export default {
     removeUser() {
         //localStorage.removeItem(USER_KEY)
         store.remove(USER_KEY)
+    },
+
+    /*
+    * 保存user
+    * */
+    saveUserMsg(usermsg) {
+        //localStorage.setItem(USER_KEY, JSON.stringify(user))
+        store.set(USERMSG_KEY, usermsg)
+    },
+    /*
+    * 读取user
+    * */
+    getUserMsg() {
+        //return JSON.parse(localStorage.getItem(USER_KEY) || '{}')
+        return store.get(USERMSG_KEY) || {}
+    },
+    /*
+    * 删除user
+    * */
+    removeUserMsg() {
+        //localStorage.removeItem(USER_KEY)
+        store.remove(USERMSG_KEY)
     }
+
+
 
 }

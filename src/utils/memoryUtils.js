@@ -3,5 +3,6 @@
 * */
 
 export default {
-    user:{}    //保存当前登录的user
+    user:{}, //保存当前登录的user
+    usermsg:{} //保存当前登录的用户角色信息
 }

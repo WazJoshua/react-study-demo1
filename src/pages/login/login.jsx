@@ -3,7 +3,7 @@ import {Form, Input, Button, message} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {Redirect} from "react-router-dom";
 import './login.less'
-import {reqLogin} from '../../api'
+import {reqLogin, getStudent, getTeacherMSG} from '../../api'
 
 import logo from '../../assets/images/logo.png'
 import memoryUtils from "../../utils/memoryUtils";
@@ -39,9 +39,11 @@ export default class Login extends Component {
             //提示登陆成功
             message.success(result.msg)
             //console.log(result)
-
+            const usermsg=result.usermsg
             const user = result.user
+            memoryUtils.usermsg=usermsg
             memoryUtils.user = user //保存在内存中
+            storageUtils.saveUserMsg(usermsg)
             storageUtils.saveUser(user) //保存在local
             //console.log(user)
             //跳转到指定页面(不需要再回退回来,需要回退要.push())

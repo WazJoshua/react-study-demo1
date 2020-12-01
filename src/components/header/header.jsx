@@ -67,7 +67,9 @@ class Header extends Component {
             onOk: () => {
                 //删除保存的user
                 storageUtils.removeUser()
+                storageUtils.removeUserMsg()
                 memoryUtils.user = {}
+                memoryUtils.usermsg={}
                 //跳转到login页面
                 this.props.history.replace('/login')
             },

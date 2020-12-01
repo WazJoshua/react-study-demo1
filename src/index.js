@@ -14,7 +14,9 @@ import memoryUtils from "./utils/memoryUtils";
 //读取local中保存的user,保存到内存中
 
 const user = storageUtils.getUser();
+const usermsg=storageUtils.getUserMsg();
 memoryUtils.user = user
+memoryUtils.usermsg=usermsg
 
 //将App组件标签渲染到index页面的div上
 ReactDom.render(<App></App>, document.getElementById('root'))

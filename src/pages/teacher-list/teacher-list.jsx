@@ -5,19 +5,6 @@ import {Collapse, message} from 'antd';
 import {getTeacherList} from '../../api'
 import TeacherListPanel from "./teacher-list-panel/teacher-list-panel";
 
-const {Panel} = Collapse;
-
-
-/*function callback(key) {
-    console.log(key);
-}*/
-
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
-
 /*
 * 老师列表路由
 */
@@ -41,28 +28,12 @@ export default class TeacherList extends Component {
     }
 
     renderTeachersIntoPage = (teachers) => {
-        //console.log("renderintopage", this.state.teachers)
-        //console.log("render")
+
         return teachers.map(item => {
             if (!teachers.teacherId) {
-                /*return (<Panel header={"教师名:"+item.teacherName} key={item.teacherId}>
-                    <p>{item.teacherId}</p>
-                </Panel>);*/
                 return <TeacherListPanel item={item}></TeacherListPanel>
             } else this.renderTeachersIntoPage()
-
         })
-
-        /*  teachers.map(item => {
-
-            if (!item.teacherId) {
-                return (
-                    <Panel header="This is panel header 1" key="1">
-                        <p>{item.teacherId}</p>
-                    </Panel>
-                )
-            }
-        })*/
     }
 
     componentDidMount() {
@@ -77,15 +48,6 @@ export default class TeacherList extends Component {
         return (
             <div>
                 <Collapse accordion>
-                    {/*<Panel header="This is panel header 1" key="1">
-                        <p>{text}</p>
-                    </Panel>
-                    <Panel header="This is panel header 2" key="2">
-                        <p>{text}</p>
-                    </Panel>
-                    <Panel header="This is panel header 3" key="3" disabled>
-                        <p>{text}</p>
-                    </Panel>*/}
                     {this.renderTeachersIntoPage(this.state.teachers)}
                 </Collapse>
             </div>

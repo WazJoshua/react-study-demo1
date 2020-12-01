@@ -3,7 +3,6 @@ import {
     UnorderedListOutlined,
     HomeOutlined,
     SnippetsOutlined,
-    PieChartOutlined,
     HddOutlined,
 } from '@ant-design/icons';
 
