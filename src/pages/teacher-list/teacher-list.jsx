@@ -16,7 +16,6 @@ export default class TeacherList extends Component {
 
     getTeacher = async () => {
         const result = await getTeacherList();
-
         if (result.code === 200) {
             const teachers = result.teachers;
             this.setState({
@@ -28,18 +27,15 @@ export default class TeacherList extends Component {
     }
 
     renderTeachersIntoPage = (teachers) => {
-
         return teachers.map(item => {
             if (!teachers.teacherId) {
-                return <TeacherListPanel item={item}></TeacherListPanel>
-            } else this.renderTeachersIntoPage()
+                return <TeacherListPanel item={item}/>
+            }
         })
     }
 
     componentDidMount() {
-
         this.getTeacher()
-        //this.renderTeachersIntoPage()
     }
 
 

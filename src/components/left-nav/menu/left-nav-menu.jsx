@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link, withRouter} from "react-router-dom"
 import {Menu} from 'antd';
 import memoryUtils from "../../../utils/memoryUtils";
-import {menuListStudent, menuListTeacher} from "../../../config/menuConfig";
+import {menuListAdmin, menuListStudent, menuListTeacher} from "../../../config/menuConfig";
 
 const {SubMenu} = Menu;
 
@@ -63,6 +63,17 @@ class LeftNavMenu extends Component {
                     </Menu>
                 </div>
             )
+        }else {
+            //管理员界面
+            return (<div>
+                <Menu
+                    selectedKeys={[path]}
+                    mode="inline"
+                    theme="light"
+                >
+                    {this.getMenuNodes(menuListAdmin)}
+                </Menu>
+            </div>)
         }
 
 

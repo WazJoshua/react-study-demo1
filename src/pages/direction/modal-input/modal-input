@@ -1,0 +1,107 @@
+import React, {Component} from 'react'
+import {Input, Modal, Button, Form} from 'antd';
+import {addDirections} from "../../../api";
+import memoryUtils from "../../../utils/memoryUtils";
+
+const {TextArea} = Input;
+
+export default function ModalInput(props) {
+
+    const [visible, setVisible] = React.useState(false);
+    const [confirmLoading, setConfirmLoading] = React.useState(false);
+
+    const showModal = () => {
+        setVisible(true);
+    };
+
+    const handleOk = (values) => {
+        //console.log("handleok",values)
+        setConfirmLoading(true);
+        setTimeout(() => {
+            setVisible(false);
+            setConfirmLoading(false);
+        }, 850);
+    };
+
+    const handleCancel = () => {
+        //console.log('Clicked cancel button');
+        setVisible(false);
+    };
+
+    const addDirection = (values) => {
+        //console.log("addDirection", values)
+        setConfirmLoading(true);
+        addDirections(values.directionDescription, memoryUtils.usermsg.teacherId)
+        setTimeout(() => {
+            setVisible(false);
+            setConfirmLoading(false);
+
+        }, 850);
+
+    }
+
+    if (props.direction != null) {
+        return (
+            <>
+                <Button type="primary" onClick={showModal}>
+                    {props.title}
+                </Button>
+                <Modal
+                    title={props.title}
+                    visible={visible}
+                    confirmLoading={confirmLoading}
+                    onCancel={handleCancel}
+                    footer={null}
+                >
+                    <Form>
+                        <Form.Item>
+                            <TextArea defaultValue={props.direction.directionDescription}/>
+                        </Form.Item>
+                    </Form>
+                    <div className='ant-modal-footer'>
+                        <Button type='primary' htmlType='submit'>确认</Button>
+                        <Button onClick={handleCancel.bind()}>取消</Button>
+                    </div>
+                </Modal>
+            </>
+        );
+    } else {
+        return (<>
+            <Button type="primary" onClick={showModal}>
+                {props.title}
+            </Button>
+            <Modal
+                title={props.title}
+                visible={visible}
+                onOk={handleOk}
+                confirmLoading={confirmLoading}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Form onFinish={addDirection}>
+                    <Form.Item
+                        name={["directionDescription"]}
+                        rules={[
+                            {
+                                required: true,
+                                message: "请输入内容!"
+                            }
+                        ]
+                        }
+                    >
+                        <TextArea/>
+                    </Form.Item>
+                    <Form.Item>
+                        <div className='ant-modal-footer'>
+                            <Button type='primary' htmlType='submit'>确认</Button>
+                            <Button onClick={handleCancel.bind()}>取消</Button>
+                        </div>
+                    </Form.Item>
+                </Form>
+
+            </Modal>
+        </>)
+    }
+
+
+}

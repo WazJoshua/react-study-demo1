@@ -3,9 +3,9 @@ import {Form, Input, Button, message} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {Redirect} from "react-router-dom";
 import './login.less'
-import {reqLogin, getStudent, getTeacherMSG} from '../../api'
+import {reqLogin} from '../../api'
 
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/logo2.png'
 import memoryUtils from "../../utils/memoryUtils";
 import storageUtils from "../../utils/storageUtils";
 

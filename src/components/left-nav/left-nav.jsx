@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 
 import './left-nav.less'
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/logo2.png'
 import LeftNavMenu from "./menu/left-nav-menu";
 
 /*

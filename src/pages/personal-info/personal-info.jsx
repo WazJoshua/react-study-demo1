@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import {Form, Input, InputNumber, Button, message} from 'antd';
+import {Form, Input, Button, message} from 'antd';
 
 import './personal-info.less'
 import memoryUtils from "../../utils/memoryUtils";
-import {updateStudentInfo} from '../../api'
+import {updateStudentInfo, updateTeacherInfo} from '../../api'
 import storageUtils from "../../utils/storageUtils";
 
 const layout = {
@@ -25,7 +25,7 @@ const validateMessages = {
     },
 };
 
-const onFinish = async values => {
+const onFinishS = async values => {
     //console.log(values);
     const user = values.user
     let usermsg = memoryUtils.usermsg
@@ -42,6 +42,23 @@ const onFinish = async values => {
         message.error(result.msg);
     }
 };
+
+const onFinishT = async values => {
+    //console.log(values);
+    const user = values.user
+    let usermsg = memoryUtils.usermsg
+    const result = await updateTeacherInfo(memoryUtils.user.userCode, user.password, user.newpassword, user.email);
+    //console.log(result)
+    if (result.code === 200) {
+        message.success(result.msg);
+        usermsg.teacherEmail = user.email
+        memoryUtils.usermsg = usermsg
+        storageUtils.saveUserMsg(usermsg)
+    } else {
+        message.error(result.msg);
+    }
+};
+
 /*
 * 个人信息路由
 * */
@@ -51,7 +68,7 @@ export default class PersonalInfo extends Component {
             return (
                 <div>
                     <div className="info-form">
-                        <Form {...layout} name="nest-messages" onFinish={onFinish} layout="horizontal"
+                        <Form {...layout} name="nest-messages" onFinish={onFinishS} layout="horizontal"
                               validateMessages={validateMessages}>
 
                             <Form.Item
@@ -96,7 +113,44 @@ export default class PersonalInfo extends Component {
             )
         } else if (memoryUtils.user.userRole === 3) {       //这里写老师的info
             return (<div>
-                teacherinfo
+                <div className="info-form">
+                    <Form {...layout} name="nest-messages" onFinish={onFinishT} layout="horizontal"
+                          validateMessages={validateMessages}>
+
+                        <Form.Item
+                            initialValue={memoryUtils.usermsg.teacherEmail}
+                            name={['user', 'email']}
+                            label="邮箱"
+                            rules={[
+                                {
+                                    type: 'email',
+                                },
+                            ]}
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item name={['user', 'newpassword']} label="修改密码">
+                            <Input type='password'/>
+                        </Form.Item>
+                        <Form.Item
+
+                            name={['user', 'password']}
+                            label="当前密码"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <Input type='password'/>
+                        </Form.Item>
+                        <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
+                            <Button type="primary" htmlType="submit">
+                                提交
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </div>
             </div>)
         }
     }

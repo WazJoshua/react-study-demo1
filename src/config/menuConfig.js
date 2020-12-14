@@ -3,7 +3,7 @@ import {
     UnorderedListOutlined,
     HomeOutlined,
     SnippetsOutlined,
-    HddOutlined,
+    HddOutlined, FundOutlined, TeamOutlined, BookOutlined,
 } from '@ant-design/icons';
 
 export const menuListTeacher = [
@@ -32,12 +32,6 @@ export const menuListTeacher = [
                 key: "/direction",
                 icon: <SnippetsOutlined/>,
             },
-            {
-                title: "已选学生列表",
-                key: "/confirmstudent",
-                icon: <HomeOutlined/>,
-            },
-
         ]
     }
 
@@ -57,6 +51,24 @@ export const menuListStudent = [
         title: "导师列表",
         key: "/teacher",
         icon: <UnorderedListOutlined/>,
+    }
+]
+
+export const menuListAdmin=[
+    {
+        title:'系统设置',
+        key:'/managesystem',
+        icon: <FundOutlined />,
+    },
+    {
+        title:'学生管理',
+        key:'/managestudent',
+        icon: <TeamOutlined />,
+    },
+    {
+        title:'老师管理',
+        key:'/manageteacher',
+        icon: <BookOutlined />,
     }
 ]
 

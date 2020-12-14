@@ -5,18 +5,20 @@
 import ajax from './ajax'
 import jsonp from "jsonp";
 
+const BASE = '/api'
+
 //登录
-export const reqLogin = (userCode, password) => ajax('/login', {userCode, password}, 'POST')
+export const reqLogin = (userCode, password) => ajax(BASE + '/login', {userCode, password}, 'POST')
 
 /*export const getStudent = (userCode) => ajax('/getStudent', {userCode}, 'POST')
 
 //export const getTeacherMSG = (userCode) => ajax('/getTeacher', {userCode}, 'POST')*/
 
-export const getTeacherList = () => ajax('/getAllTeacher', {}, 'GET')
+export const getTeacherList = () => ajax(BASE + '/getAllTeacher', {}, 'GET')
 
-export const getMyDirections = (teacherId) =>ajax('/getMyDirection',{teacherId},'POST')
+export const getMyDirections = (teacherId) => ajax(BASE + '/getMyDirection', {teacherId}, 'POST')
 
-export const updateStudentInfo = (usercode, password, newpassword, email, direction) => ajax('/updateSInfo', {
+export const updateStudentInfo = (usercode, password, newpassword, email, direction) => ajax(BASE + '/updateSInfo', {
     usercode,
     password,
     newpassword,
@@ -24,33 +26,42 @@ export const updateStudentInfo = (usercode, password, newpassword, email, direct
     direction
 }, 'POST')
 
-//export const selectTeacher = (teacherId) =>ajax('/studentselectteacher',{teacherId},'POST')
+export const updateTeacherInfo = (usercode, password, newpassword, email) => ajax(BASE + '/updateTInfo', {
+    usercode,
+    password,
+    newpassword,
+    email,
+}, 'POST')
+
+
+export const addDirections = (directionDescription, directionTeacherId) => ajax(BASE + "/addDirection", {
+    directionDescription,
+    directionTeacherId
+}, 'POST')
+
+export const deleteDirections = (directionId) => ajax(BASE + '/deleteDirection', {directionId}, 'POST')
+
+export const updateDirection = (directionId, directionDescription) => ajax(BASE + '/updateDirection', {
+    directionId,
+    directionDescription
+}, 'POST')
+
+export const getMyStudents = (teacherId) => ajax(BASE + '/getMyStudents', {teacherId}, 'POST')
+
+export const confirmStudent = (studentId, teacherId) => ajax(BASE + '/confirmStudent', {studentId, teacherId}, 'POST')
+
+export const getAllStudents = () => ajax(BASE + '/getAllStudents', {}, 'GET')
 
 export const selectTeacher = (teacherId, studentId) => {
-    const url = `http://localhost:7936/studentselectteacher?teacherId=${teacherId}&studentId=${studentId}`
+    const url = `http://localhost:7936/api/studentselectteacher?teacherId=${teacherId}&studentId=${studentId}`
     jsonp(url, "callback", (err, data) => {
         console.log('jsonp()', err, data)
     })
 }
 export const unselectTeacher = (teacherId, studentId) => {
-    const url = `http://localhost:7936/unselectTeacher?teacherId=${teacherId}&studentId=${studentId}`
+    const url = `http://localhost:7936/api/unselectTeacher?teacherId=${teacherId}&studentId=${studentId}`
     jsonp(url, "callback", (err, data) => {
         console.log('jsonp()', err, data)
     })
 }
 
-
-/*
-* jsonp请求的接口函数
-* */
-
-/*
-export const reqWeather = (citycode) => {
-
-    const url = `http://api.map.baidu.com/weather/v1/?district_id=${citycode}&data_type=all&output=json&ak=B5ORXn5VUuw82hCgDQAYlBfsURQCwEpi`
-
-    jsonp(url, "callback", (err, data) => {
-        console.log('jsonp()', err, data)
-    })
-}
-reqWeather(370103)*/
