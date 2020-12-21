@@ -21,6 +21,7 @@ export default class StudentPanel extends React.Component {
     render() {
         return (
             <Panel className="student-list-panel" {...this.props} header={<PanelHeader student={this.props.item}/>}>
+                {/*{console.log('student',this.state.student)}*/}
                 <h1 className="title">学生信息</h1>{this.state.student.studentName}<p className="panel-info">{this.state.student.personalDirection}</p>
             </Panel>
         )

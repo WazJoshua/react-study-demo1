@@ -11,7 +11,7 @@ export default class StudentPanelHeader extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props.student)
+        //console.log(this.props.student)
         if (this.props.student.isSelected == 1) {
             this.state = {
                 buttonU: true,

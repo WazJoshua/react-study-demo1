@@ -38,6 +38,11 @@ export default class PanelHeader extends React.Component {
     studentselectTeacher(teacherId, studentId, e) {
 
         if (this.state.buttonText === '选择') {
+            if (this.props.props.confirmNums==this.props.props.maxNums){
+                message.error("老师可选人数已满!")
+                e.preventDefault()
+                return
+            }
             if (this.state.usermsg.teacherId != null) {
                 message.error("你已经选择了导师!")
                 e.preventDefault()
